@@ -5,7 +5,7 @@ public class ManejoDeInventario {
     public static void main(String[] args) throws Exception {
         Scanner teclado = new Scanner(System.in);
         ArrayList<ArrayList<String>> inventario = new ArrayList<>();
-        int seleccion;
+        int seleccion = 0;
         int contador = 0;
         do {
             System.out.println("Menú");
@@ -18,8 +18,14 @@ public class ManejoDeInventario {
             System.out.println();
             System.out.println("¿Que desea hacer?");
             System.out.println();
-            seleccion = teclado.nextInt();
-            teclado.nextLine();
+            if (teclado.hasNextInt()) {
+                seleccion = teclado.nextInt();
+                teclado.nextLine();
+            } else {
+                System.out.println("Debes ingresar un número.");
+                teclado.nextLine(); // Limpiar el buffer de la entrada incorrecta
+                continue; // Vuelve al inicio del ciclo
+            }
             switch (seleccion){
                 case 1:
                     System.out.println("Agregar un producto al inventario");
