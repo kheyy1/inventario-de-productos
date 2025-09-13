@@ -33,6 +33,8 @@ public class ManejoDeInventario {
                     System.out.println("Ingrese la cantidad de unidades del producto");
                     String cantidadProducto = teclado.nextLine();
                     ArrayList<String> fila = new ArrayList<>();
+                    System.out.println(nombreProducto + " ha sido agregado al inventario");
+                    System.out.println();
                     fila.add(nombreProducto);
                     fila.add(precioProducto);
                     fila.add(cantidadProducto);
@@ -41,13 +43,16 @@ public class ManejoDeInventario {
                 case 2:
                 contador = 0;
                     System.out.println("Ingrese el codigo del producto que desea eliminar del inventario");
+                    System.out.println();
                     for (ArrayList<String> filaProducto : inventario){
-                        System.out.println(contador + ". " + filaProducto.get(0));
+                        System.out.println(contador + ". " + filaProducto.get(0)); // fila[0] = nombre, fila[1] = precio, fila[2] = cantidad
                         contador++;
                     }
                     seleccion = teclado.nextInt(); 
-                    if (seleccion >= 0 && seleccion <= inventario.size()){
+                    if (seleccion >= 0 && seleccion < inventario.size()){
                         inventario.remove(seleccion);
+                        System.out.println("Se ha eliminado el producto satisfactoriamente");
+                        System.out.println();
                     }
                     else {
                         System.out.println("Ha ingresado un codigo invalido");
@@ -55,6 +60,7 @@ public class ManejoDeInventario {
                     break;
                 case 3:
                     System.out.println("Ingrese el codigo del producto que desea modificar su precio");
+                    System.out.println();
                     contador = 0;
                         for (ArrayList<String> filaProducto : inventario){
                         System.out.println(contador + ". " + filaProducto.get(0));
@@ -62,11 +68,12 @@ public class ManejoDeInventario {
                     }
                     seleccion = teclado.nextInt();
                     teclado.nextLine();
-                    if (seleccion >= 0 && seleccion <= inventario.size()){
-                        System.out.println("Ingrese el nuevo precio para " + inventario.get(seleccion).get(0));
+                    if (seleccion >= 0 && seleccion < inventario.size()){
+                        System.out.println("Ingrese el nuevo precio para " + inventario.get(seleccion).get(0)); // fila[0] = nombre, fila[1] = precio, fila[2] = cantidad
                         String nuevoPrecio = teclado.nextLine();
                         inventario.get(seleccion).set(1, nuevoPrecio);
                         System.out.println("Precio cambiado satisfactoriamente");
+                        System.out.println();
                     }
                     else{
                         System.out.println("Ha ingresado un codigo invalido");
@@ -81,11 +88,12 @@ public class ManejoDeInventario {
                     }
                     seleccion = teclado.nextInt();
                     teclado.nextLine();
-                    if (seleccion >= 0 && seleccion <= inventario.size()){
-                        System.out.println("Ingrese la nueva cantidad de " + inventario.get(seleccion).get(0));
+                    if (seleccion >= 0 && seleccion < inventario.size()){
+                        System.out.println("Ingrese la nueva cantidad de " + inventario.get(seleccion).get(0)); // fila[0] = nombre, fila[1] = precio, fila[2] = cantidad
                         String nuevaCantidad = teclado.nextLine();
                         inventario.get(seleccion).set(2, nuevaCantidad);
                         System.out.println("Cantidad cambiada satisfactoriamente");
+                        System.out.println();
                     }
                     else{
                         System.out.println("Ha ingresado un codigo invalido");
