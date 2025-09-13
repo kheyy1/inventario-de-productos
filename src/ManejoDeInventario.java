@@ -102,11 +102,15 @@ public class ManejoDeInventario {
                     }
                     System.out.println("Valor total del inventario " + valorTotalInventario);
                     break;
+                case 6:
+                System.out.println("Saliendo...");
+                break;
                 default: 
                     System.out.println("Ingresa un valor valido por favor");
+                    break;
             }
         }
-        while (seleccion != 4);
+        while (seleccion != 6);
         teclado.close();
     }
 }
