@@ -8,7 +8,7 @@ public class ManejoDeInventario {
                                                             // de Strings
         int seleccion = 0;
         int contador = 0;
-        boolean datoInvalido = true;
+        boolean datoEsInvalido = true;
         do { // Implementamos este do-while para poder romper el ciclo si el usuario usa la
              // opcion 6 (salir del menu)
             System.out.println("Menú"); // imprimir el menu con sus seis opciones
@@ -41,7 +41,7 @@ public class ManejoDeInventario {
                     String nombreProducto = teclado.nextLine();
                     System.out.println("---------------------------------");
                     String precioProducto = "";
-                    while (datoInvalido) { // Este bucle while se va a repetir hasta que se ingresa un valor valido, y
+                    while (datoEsInvalido) { // Este bucle while se va a repetir hasta que se ingresa un valor valido, y
                                            // en la linea 51 se detiende gracias a un break
                         System.out.println("Ingrese el precio del producto " + nombreProducto);
                         if (teclado.hasNextFloat()) { // Comprueba que se ingrese un numero y no texto
@@ -65,7 +65,7 @@ public class ManejoDeInventario {
                     }
                     System.out.println("---------------------------------");
                     String cantidadProducto = "";
-                    while (datoInvalido) {
+                    while (datoEsInvalido) {
                         System.out.println("Ingrese la cantidad de unidades del producto");
                         if (teclado.hasNextInt()) {
                             int intCantidadProducto = teclado.nextInt();
@@ -91,7 +91,7 @@ public class ManejoDeInventario {
                     break;
                 case 2:
                     if (inventario.size() != 0) {
-                        while (datoInvalido) {
+                        while (datoEsInvalido) {
                             contador = 0;
                             System.out.println("Ingrese el codigo del producto que desea eliminar del inventario");
                             System.out.println();
@@ -123,7 +123,7 @@ public class ManejoDeInventario {
                     break;
                 case 3:
                     if (inventario.size() != 0) {
-                        while (datoInvalido) {
+                        while (datoEsInvalido) {
                             System.out.println("Ingrese el codigo del producto que desea modificar su precio");
                             System.out.println();
                             contador = 0; // Este contador genera los indices correspondientes a cada elemento existente
@@ -158,7 +158,7 @@ public class ManejoDeInventario {
                     break;
                 case 4:
                     if (inventario.size() != 0) {
-                        while (datoInvalido) {
+                        while (datoEsInvalido) {
                             System.out.println("Ingrese el codigo del producto que desea modificar su cantidad");
                             contador = 0;
                             for (String[] filaProducto : inventario) {
@@ -227,7 +227,7 @@ public class ManejoDeInventario {
                     System.out.println("Ingresa un valor valido por favor");
                     break;
             }
-        } while (seleccion != 6);
+        } while (seleccion != 6); //Se continua el ciclo mientras no se seleccione la opcion 6
         teclado.close();
     }
 }
