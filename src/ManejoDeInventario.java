@@ -4,11 +4,11 @@ import java.util.ArrayList;
 public class ManejoDeInventario {
     public static void main(String[] args) throws Exception {
         Scanner teclado = new Scanner(System.in);
-        ArrayList<ArrayList<String>> inventario = new ArrayList<>();
-        int seleccion = 0;
+        ArrayList<String[]> inventario = new ArrayList<>(); // Vamos a utilizar un Arraylist cuyos elementos son arrays de Strings
+        int seleccion = 0; 
         int contador = 0;
-        do {
-            System.out.println("Menú");
+        do { // Implementamos este do-while para poder romper el ciclo si el usuario usa la opcion 6 (salir del menu)
+            System.out.println("Menú"); //imprimir el menu con sus seis opciones
             System.out.println("1. Agregar un producto nuevo al inventario");
             System.out.println("2. Retirar un producto del inventario");
             System.out.println("3. Modificar un precio de un producto");
@@ -18,15 +18,15 @@ public class ManejoDeInventario {
             System.out.println();
             System.out.println("¿Que desea hacer?");
             System.out.println();
-            if (teclado.hasNextInt()) {
-                seleccion = teclado.nextInt();
-                teclado.nextLine();
+            if (teclado.hasNextInt()) { //Para evitar la excepcion InputMismatchException ocasionada por ingresar un string, char, o decimal
+                seleccion = teclado.nextInt();//cuando el scanner espera un Int, se utiliza el metodo de los scanners ".hasNextInt" el cual 
+                teclado.nextLine(); //devuelve un booleano, true si se lee lo que esperamos (un int), y false si es otro tipo de dato, y lo implementamos a un condicional
             } else {
-                System.out.println("Debes ingresar un número.");
-                teclado.nextLine(); // Limpiar el buffer de la entrada incorrecta
-                continue; // Vuelve al inicio del ciclo
+                System.out.println("Ingresa un valor valido por favor");
+                teclado.nextLine();
+                continue; 
             }
-            switch (seleccion){
+            switch (seleccion){ //Switch principal que maneja los diversos casos que se plantean en el menu (1-6), y tambien el caso default por si el valor ingresado no es valido
                 case 1:
                     System.out.println("Agregar un producto al inventario");
                     System.out.println("---------------------------------");
@@ -38,20 +38,20 @@ public class ManejoDeInventario {
                     System.out.println("---------------------------------");
                     System.out.println("Ingrese la cantidad de unidades del producto");
                     String cantidadProducto = teclado.nextLine();
-                    ArrayList<String> fila = new ArrayList<>();
+                    String[] fila = new String[3];
+                    fila[0] = nombreProducto;
+                    fila[1] = precioProducto;
+                    fila[2] = cantidadProducto;
                     System.out.println(nombreProducto + " ha sido agregado al inventario");
                     System.out.println();
-                    fila.add(nombreProducto);
-                    fila.add(precioProducto);
-                    fila.add(cantidadProducto);
                     inventario.add(fila);
                     break;
                 case 2:
                 contador = 0;
                     System.out.println("Ingrese el codigo del producto que desea eliminar del inventario");
                     System.out.println();
-                    for (ArrayList<String> filaProducto : inventario){
-                        System.out.println(contador + ". " + filaProducto.get(0)); // fila[0] = nombre, fila[1] = precio, fila[2] = cantidad
+                    for (String[] filaProducto : inventario){
+                        System.out.println(contador + ". " + filaProducto[0]);
                         contador++;
                     }
                     seleccion = teclado.nextInt(); 
@@ -68,16 +68,16 @@ public class ManejoDeInventario {
                     System.out.println("Ingrese el codigo del producto que desea modificar su precio");
                     System.out.println();
                     contador = 0;
-                        for (ArrayList<String> filaProducto : inventario){
-                        System.out.println(contador + ". " + filaProducto.get(0));
+                        for (String[] filaProducto : inventario){
+                        System.out.println(contador + ". " + filaProducto[0]);
                         contador++;
                     }
                     seleccion = teclado.nextInt();
                     teclado.nextLine();
                     if (seleccion >= 0 && seleccion < inventario.size()){
-                        System.out.println("Ingrese el nuevo precio para " + inventario.get(seleccion).get(0)); // fila[0] = nombre, fila[1] = precio, fila[2] = cantidad
+                        System.out.println("Ingrese el nuevo precio para " + inventario.get(seleccion)[0]);
                         String nuevoPrecio = teclado.nextLine();
-                        inventario.get(seleccion).set(1, nuevoPrecio);
+                        inventario.get(seleccion)[1] = nuevoPrecio;
                         System.out.println("Precio cambiado satisfactoriamente");
                         System.out.println();
                     }
@@ -88,16 +88,16 @@ public class ManejoDeInventario {
                 case 4: 
                     System.out.println("Ingrese el codigo del producto que desea modificar su cantidad");
                     contador = 0;
-                        for (ArrayList<String> filaProducto : inventario){
-                        System.out.println(contador + ". " + filaProducto.get(0));
+                        for (String[] filaProducto : inventario){
+                        System.out.println(contador + ". " + filaProducto[0]);
                         contador++;
                     }
                     seleccion = teclado.nextInt();
                     teclado.nextLine();
                     if (seleccion >= 0 && seleccion < inventario.size()){
-                        System.out.println("Ingrese la nueva cantidad de " + inventario.get(seleccion).get(0)); // fila[0] = nombre, fila[1] = precio, fila[2] = cantidad
+                        System.out.println("Ingrese la nueva cantidad de " + inventario.get(seleccion)[0]);
                         String nuevaCantidad = teclado.nextLine();
-                        inventario.get(seleccion).set(2, nuevaCantidad);
+                        inventario.get(seleccion)[2] = nuevaCantidad;
                         System.out.println("Cantidad cambiada satisfactoriamente");
                         System.out.println();
                     }
@@ -108,10 +108,10 @@ public class ManejoDeInventario {
                 case 5:
                     System.out.println("Inventario actual:");
                     float valorTotalInventario = 0;
-                    for (ArrayList<String> filaProducto : inventario) {
-                        int cantidad = Integer.parseInt(filaProducto.get(2));
-                        float precio = Float.parseFloat(filaProducto.get(1));
-                        System.out.println("Nombre: " + filaProducto.get(0) + " | Precio: " + filaProducto.get(1) + " | Cantidad: " + filaProducto.get(2) + " | Total: " + cantidad*precio );
+                    for (String[] filaProducto : inventario) {
+                        int cantidad = Integer.parseInt(filaProducto[2]);
+                        float precio = Float.parseFloat(filaProducto[1]);
+                        System.out.println("Nombre: " + filaProducto[0] + " | Precio: " + filaProducto[1] + " | Cantidad: " + filaProducto[2] + " | Total: " + cantidad*precio );
                         valorTotalInventario = valorTotalInventario + cantidad*precio;
                     }
                     System.out.println("Valor total del inventario " + valorTotalInventario);
