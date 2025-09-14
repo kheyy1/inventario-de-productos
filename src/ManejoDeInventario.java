@@ -139,7 +139,7 @@ public class ManejoDeInventario {
                                     System.out.println("Ingrese el nuevo precio para " + inventario.get(seleccion)[0]);
                                     Float floatNuevoPrecio = teclado.nextFloat();
                                     String nuevoPrecio = String.valueOf(floatNuevoPrecio);
-                                    inventario.get(seleccion)[1] = nuevoPrecio;
+                                    inventario.get(seleccion)[1] = nuevoPrecio; //Reasigna el precio (que se ubica en el indice 1 del arreglo)
                                     System.out.println("Precio cambiado satisfactoriamente");
                                     System.out.println();
                                     break;
@@ -171,10 +171,10 @@ public class ManejoDeInventario {
                                 if (seleccion >= 0 && seleccion < inventario.size()) {
                                     System.out.println("Ingrese la nueva cantidad de " + inventario.get(seleccion)[0]);
                                     if (teclado.hasNextInt()){
-                                    int intNuevaCantidad = teclado.nextInt();
+                                    int intNuevaCantidad = teclado.nextInt(); //Lee la cantidad como entero para poder validar con el metodo .hasNextInt()
                                     teclado.nextLine();
-                                    String nuevaCantidad = String.valueOf(intNuevaCantidad);
-                                    inventario.get(seleccion)[2] = nuevaCantidad;
+                                    String nuevaCantidad = String.valueOf(intNuevaCantidad); //Toma el valor que se leyó de la cantidad, y la convierte en un string para poder ingresarla al arreglo
+                                    inventario.get(seleccion)[2] = nuevaCantidad; //Reasigna la cantidad (que se ubica en el indice 2 del arreglo)
                                     System.out.println("Cantidad cambiada satisfactoriamente");
                                     System.out.println();
                                     break;
