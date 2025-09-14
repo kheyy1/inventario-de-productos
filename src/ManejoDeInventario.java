@@ -42,7 +42,7 @@ public class ManejoDeInventario {
                     System.out.println("---------------------------------");
                     String precioProducto = "";
                     while (datoEsInvalido) { // Este bucle while se va a repetir hasta que se ingresa un valor valido, y
-                                           // en la linea 51 se detiende gracias a un break
+                                             // en la linea 57 se detiende gracias a un break
                         System.out.println("Ingrese el precio del producto " + nombreProducto);
                         if (teclado.hasNextFloat()) { // Comprueba que se ingrese un numero y no texto
                             float floatPrecioProducto = teclado.nextFloat(); // Esta es una "variable temporal" que
@@ -139,7 +139,8 @@ public class ManejoDeInventario {
                                     System.out.println("Ingrese el nuevo precio para " + inventario.get(seleccion)[0]);
                                     Float floatNuevoPrecio = teclado.nextFloat();
                                     String nuevoPrecio = String.valueOf(floatNuevoPrecio);
-                                    inventario.get(seleccion)[1] = nuevoPrecio; //Reasigna el precio (que se ubica en el indice 1 del arreglo)
+                                    inventario.get(seleccion)[1] = nuevoPrecio; // Reasigna el precio (que se ubica en
+                                                                                // el indice 1 del arreglo)
                                     System.out.println("Precio cambiado satisfactoriamente");
                                     System.out.println();
                                     break;
@@ -170,14 +171,23 @@ public class ManejoDeInventario {
                                 teclado.nextLine();
                                 if (seleccion >= 0 && seleccion < inventario.size()) {
                                     System.out.println("Ingrese la nueva cantidad de " + inventario.get(seleccion)[0]);
-                                    if (teclado.hasNextInt()){
-                                    int intNuevaCantidad = teclado.nextInt(); //Lee la cantidad como entero para poder validar con el metodo .hasNextInt()
-                                    teclado.nextLine();
-                                    String nuevaCantidad = String.valueOf(intNuevaCantidad); //Toma el valor que se leyó de la cantidad, y la convierte en un string para poder ingresarla al arreglo
-                                    inventario.get(seleccion)[2] = nuevaCantidad; //Reasigna la cantidad (que se ubica en el indice 2 del arreglo)
-                                    System.out.println("Cantidad cambiada satisfactoriamente");
-                                    System.out.println();
-                                    break;
+                                    if (teclado.hasNextInt()) {
+                                        int intNuevaCantidad = teclado.nextInt(); // Lee la cantidad como entero para
+                                                                                  // poder validar con el metodo
+                                                                                  // .hasNextInt()
+                                        teclado.nextLine();
+                                        String nuevaCantidad = String.valueOf(intNuevaCantidad); // Toma el valor que se
+                                                                                                 // leyó de la cantidad,
+                                                                                                 // y la convierte en un
+                                                                                                 // string para poder
+                                                                                                 // ingresarla al
+                                                                                                 // arreglo
+                                        inventario.get(seleccion)[2] = nuevaCantidad; // Reasigna la cantidad (que se
+                                                                                      // ubica en el indice 2 del
+                                                                                      // arreglo)
+                                        System.out.println("Cantidad cambiada satisfactoriamente");
+                                        System.out.println();
+                                        break;
                                     } else {
                                         System.out.println("Ha ingresado una cantidad invalida");
                                         teclado.nextLine();
@@ -186,39 +196,41 @@ public class ManejoDeInventario {
                                 } else {
                                     System.out.println("Ha ingresado un codigo invalido");
                                 }
-                            }else {
+                            } else {
                                 System.out.println("Ha ingresado un codigo invalido");
                                 teclado.nextLine();
                             }
                         }
-                    }
-                    else {
+                    } else {
                         System.out.println("No hay ningun producto en el inventario");
                         System.out.println();
                     }
                     break;
                 case 5:
-                if (inventario.size() != 0) {
-                    System.out.println("Inventario actual:");
-                    float valorTotalInventario = 0;
-                    for (String[] filaProducto : inventario) {
-                        int cantidad = Integer.parseInt(filaProducto[2]); // IMPORTANTE -> Todos los datos se ingresan
-                                                                          // como Strings, pues en Java, solo se pueden
-                                                                          // poner datos del mismo tiopo en un mismo
-                                                                          // array
-                        float precio = Float.parseFloat(filaProducto[1]); // Es por eso que en estas dos lineas, se
-                                                                          // transforman los Strings a enteros y
-                                                                          // decimales, pues en la siguiente linea vamos
-                                                                          // a operar con ellos
-                        System.out.println("Nombre: " + filaProducto[0] + " | Precio: " + filaProducto[1]
-                                + " | Cantidad: " + filaProducto[2] + " | Total: " + cantidad * precio);
-                        valorTotalInventario = valorTotalInventario + cantidad * precio; // Variable sumador
+                    if (inventario.size() != 0) {
+                        System.out.println("Inventario actual:");
+                        float valorTotalInventario = 0;
+                        for (String[] filaProducto : inventario) {
+                            int cantidad = Integer.parseInt(filaProducto[2]); // IMPORTANTE -> Todos los datos se
+                                                                              // ingresan
+                                                                              // como Strings, pues en Java, solo se
+                                                                              // pueden
+                                                                              // poner datos del mismo tiopo en un mismo
+                                                                              // array
+                            float precio = Float.parseFloat(filaProducto[1]); // Es por eso que en estas dos lineas, se
+                                                                              // transforman los Strings a enteros y
+                                                                              // decimales, pues en la siguiente linea
+                                                                              // vamos
+                                                                              // a operar con ellos
+                            System.out.println("Nombre: " + filaProducto[0] + " | Precio: " + filaProducto[1]
+                                    + " | Cantidad: " + filaProducto[2] + " | Total: " + cantidad * precio);
+                            valorTotalInventario = valorTotalInventario + cantidad * precio; // Variable sumador
+                        }
+                        System.out.println("Valor total del inventario " + valorTotalInventario);
+                    } else {
+                        System.out.println("El inventario está vacio, usa la opcion 1 para agregar productos");
+                        System.out.println();
                     }
-                    System.out.println("Valor total del inventario " + valorTotalInventario);
-                } else {
-                    System.out.println("El inventario está vacio, usa la opcion 1 para agregar productos");
-                    System.out.println();
-                }
                     break;
                 case 6:
                     System.out.println("Saliendo...");
@@ -227,7 +239,7 @@ public class ManejoDeInventario {
                     System.out.println("Ingresa un valor valido por favor");
                     break;
             }
-        } while (seleccion != 6); //Se continua el ciclo mientras no se seleccione la opcion 6
+        } while (seleccion != 6); // Se continua el ciclo mientras no se seleccione la opcion 6
         teclado.close();
     }
 }
