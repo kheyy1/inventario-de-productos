@@ -96,7 +96,7 @@ public class ManejoDeInventario {
                             System.out.println("Ingrese el codigo del producto que desea eliminar del inventario");
                             System.out.println();
                             for (String[] filaProducto : inventario) {
-                                System.out.println(contador + ". " + filaProducto[0]);
+                                System.out.println(contador + ". " + filaProducto[0]); //indice 0:nombre, 1:precio, 2:cantidad
                                 contador++;
                             }
                             if (teclado.hasNextInt()) {
@@ -215,7 +215,7 @@ public class ManejoDeInventario {
                                                                               // ingresan
                                                                               // como Strings, pues en Java, solo se
                                                                               // pueden
-                                                                              // poner datos del mismo tiopo en un mismo
+                                                                              // poner datos del mismo tipo en un mismo
                                                                               // array
                             float precio = Float.parseFloat(filaProducto[1]); // Es por eso que en estas dos lineas, se
                                                                               // transforman los Strings a enteros y
