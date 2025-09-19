@@ -37,10 +37,21 @@ public class ManejoDeInventario {
                 case 1:
                     System.out.println("Agregar un producto al inventario");
                     System.out.println("---------------------------------");
-                    System.out.println("Ingrese el nombre de su producto");
-                    String nombreProducto = teclado.nextLine();
+                    String nombreProducto = "";
+                    datoEsInvalido = true;
+                    while (datoEsInvalido) {
+                        System.out.println("Ingrese el nombre de su producto");
+                        nombreProducto = teclado.nextLine().trim(); // El metodo trim elimina los espacios vacios al
+                                                                    // final o al principio de la entrada
+                        if (!nombreProducto.isEmpty()) {
+                            datoEsInvalido = false;
+                        } else {
+                            System.out.println("El nombre no puede estar vacío. Intente de nuevo.");
+                        }
+                    }
                     System.out.println("---------------------------------");
                     String precioProducto = "";
+                    datoEsInvalido = true;
                     while (datoEsInvalido) { // Este bucle while se va a repetir hasta que se ingresa un valor valido, y
                                              // en la linea 57 se detiende gracias a un break
                         System.out.println("Ingrese el precio del producto " + nombreProducto);
@@ -54,7 +65,7 @@ public class ManejoDeInventario {
                                 precioProducto = String.valueOf(floatPrecioProducto); // convierte el valor numerico a
                                                                                       // string para almacenarlo en
                                                                                       // nuestro array
-                                break;
+                                datoEsInvalido = false;
                             } else {
                                 System.out.println("El precio debe ser mayor a 0");
                             }
@@ -65,6 +76,7 @@ public class ManejoDeInventario {
                     }
                     System.out.println("---------------------------------");
                     String cantidadProducto = "";
+                    datoEsInvalido = true;
                     while (datoEsInvalido) {
                         System.out.println("Ingrese la cantidad de unidades del producto");
                         if (teclado.hasNextInt()) {
@@ -72,7 +84,7 @@ public class ManejoDeInventario {
                             teclado.nextLine();
                             if (intCantidadProducto > 0) {
                                 cantidadProducto = String.valueOf(intCantidadProducto);
-                                break;
+                                datoEsInvalido = false;
                             } else {
                                 System.out.println("La cantidad debe ser mayor a 0");
                             }
@@ -91,12 +103,13 @@ public class ManejoDeInventario {
                     break;
                 case 2:
                     if (inventario.size() != 0) {
+                        datoEsInvalido = true;
                         while (datoEsInvalido) {
                             contador = 0;
                             System.out.println("Ingrese el codigo del producto que desea eliminar del inventario");
                             System.out.println();
                             for (String[] filaProducto : inventario) {
-                                System.out.println(contador + ". " + filaProducto[0]); //indice 0:nombre, 1:precio, 2:cantidad
+                                System.out.println(contador + ". " + filaProducto[0]);
                                 contador++;
                             }
                             if (teclado.hasNextInt()) {
@@ -106,7 +119,7 @@ public class ManejoDeInventario {
                                     inventario.remove(seleccion); // El metodo remove, elimina un elemento del ArrayList
                                     System.out.println("Se ha eliminado el producto satisfactoriamente");
                                     System.out.println();
-                                    break;
+                                    datoEsInvalido = false;
                                 } else {
                                     System.out.println("Ha ingresado un codigo invalido");
                                     System.out.println();
@@ -123,6 +136,7 @@ public class ManejoDeInventario {
                     break;
                 case 3:
                     if (inventario.size() != 0) {
+                        datoEsInvalido = true;
                         while (datoEsInvalido) {
                             System.out.println("Ingrese el codigo del producto que desea modificar su precio");
                             System.out.println();
@@ -135,15 +149,25 @@ public class ManejoDeInventario {
                             if (teclado.hasNextInt()) {
                                 seleccion = teclado.nextInt();
                                 teclado.nextLine();
+                                float floatNuevoPrecio = 0;
                                 if (seleccion >= 0 && seleccion < inventario.size()) {
                                     System.out.println("Ingrese el nuevo precio para " + inventario.get(seleccion)[0]);
-                                    Float floatNuevoPrecio = teclado.nextFloat();
-                                    String nuevoPrecio = String.valueOf(floatNuevoPrecio);
-                                    inventario.get(seleccion)[1] = nuevoPrecio; // Reasigna el precio (que se ubica en
-                                                                                // el indice 1 del arreglo)
-                                    System.out.println("Precio cambiado satisfactoriamente");
-                                    System.out.println();
-                                    break;
+                                    if (teclado.hasNextFloat()) {
+                                        floatNuevoPrecio = teclado.nextFloat();
+                                        teclado.nextLine();
+                                        if (floatNuevoPrecio > 0) {
+                                            String nuevoPrecio = String.valueOf(floatNuevoPrecio);
+                                            inventario.get(seleccion)[1] = nuevoPrecio;
+                                            System.out.println("Precio cambiado satisfactoriamente");
+                                            System.out.println();
+                                            datoEsInvalido = false;
+                                        } else {
+                                            System.out.println("El precio debe ser mayor a 0");
+                                        }
+                                    } else {
+                                        System.out.println("El valor ingresado no es un valido");
+                                        teclado.nextLine();
+                                    }
                                 } else {
                                     System.out.println("Ha ingresado un codigo invalido");
                                 }
@@ -159,6 +183,7 @@ public class ManejoDeInventario {
                     break;
                 case 4:
                     if (inventario.size() != 0) {
+                        datoEsInvalido = true;
                         while (datoEsInvalido) {
                             System.out.println("Ingrese el codigo del producto que desea modificar su cantidad");
                             contador = 0;
@@ -175,19 +200,28 @@ public class ManejoDeInventario {
                                         int intNuevaCantidad = teclado.nextInt(); // Lee la cantidad como entero para
                                                                                   // poder validar con el metodo
                                                                                   // .hasNextInt()
-                                        teclado.nextLine();
-                                        String nuevaCantidad = String.valueOf(intNuevaCantidad); // Toma el valor que se
-                                                                                                 // leyó de la cantidad,
-                                                                                                 // y la convierte en un
-                                                                                                 // string para poder
-                                                                                                 // ingresarla al
-                                                                                                 // arreglo
-                                        inventario.get(seleccion)[2] = nuevaCantidad; // Reasigna la cantidad (que se
-                                                                                      // ubica en el indice 2 del
-                                                                                      // arreglo)
-                                        System.out.println("Cantidad cambiada satisfactoriamente");
-                                        System.out.println();
-                                        break;
+                                        if (intNuevaCantidad > 0) {
+                                            teclado.nextLine();
+                                            String nuevaCantidad = String.valueOf(intNuevaCantidad); // Toma el valor
+                                                                                                     // que se
+                                                                                                     // leyó de la
+                                                                                                     // cantidad,
+                                                                                                     // y la convierte
+                                                                                                     // en un
+                                                                                                     // string para
+                                                                                                     // poder
+                                                                                                     // ingresarla al
+                                                                                                     // arreglo
+                                            inventario.get(seleccion)[2] = nuevaCantidad; // Reasigna la cantidad (que
+                                                                                          // se
+                                                                                          // ubica en el indice 2 del
+                                                                                          // arreglo)
+                                            System.out.println("Cantidad cambiada satisfactoriamente");
+                                            System.out.println();
+                                            datoEsInvalido = false;
+                                        } else {
+                                            System.out.println("El numero debe ser positivo");
+                                        }
                                     } else {
                                         System.out.println("Ha ingresado una cantidad invalida");
                                         teclado.nextLine();
@@ -215,7 +249,7 @@ public class ManejoDeInventario {
                                                                               // ingresan
                                                                               // como Strings, pues en Java, solo se
                                                                               // pueden
-                                                                              // poner datos del mismo tipo en un mismo
+                                                                              // poner datos del mismo tiopo en un mismo
                                                                               // array
                             float precio = Float.parseFloat(filaProducto[1]); // Es por eso que en estas dos lineas, se
                                                                               // transforman los Strings a enteros y
