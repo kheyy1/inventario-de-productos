@@ -141,3 +141,10 @@ En el caso 5:
 No hay productos.
 
 Todos los errores descritos, fueron solucionados por medio del metodo ".hasNextInt()", ".hasNextFloat()" y el uso de condicionales.
+## Authors
+
+- [@Kheyner](https://github.com/kheyy1)
+- [@Jerix](https://github.com/jgbaezn-cyber)
+- [@Richard](https://github.com/)
+
+
