@@ -145,6 +145,6 @@ Todos los errores descritos, fueron solucionados por medio del metodo ".hasNextI
 
 - [@Kheyner](https://github.com/kheyy1)
 - [@Jerix](https://github.com/jgbaezn-cyber)
-- [@Richard](https://github.com/)
+- [@Richard](https://github.com/richardmejiagomez45-cmd)
 
 
